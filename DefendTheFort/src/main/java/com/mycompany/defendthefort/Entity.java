@@ -29,6 +29,8 @@ public abstract class Entity {
     private Register register = new Register(this.nombre, vida); //una clase registro para guardar los ataques recbidos/propiciados;
     ImageIcon moving; //imagen de la entidad en movimiento
     ImageIcon attacking; //imagen de la entidad atacando
+    private String movingFilepath;
+    private String attackingFilepath;
             
     
 
@@ -333,6 +335,22 @@ public abstract class Entity {
 
     public void setTipe(Types tipe) {
         this.tipe = tipe;
+    }
+
+    public String getMovingFilepath() {
+        return movingFilepath;
+    }
+
+    public void setMovingFilepath(String movingFilepath) {
+        this.movingFilepath = movingFilepath;
+    }
+
+    public String getAttackingFilepath() {
+        return attackingFilepath;
+    }
+
+    public void setAttackingFilepath(String attackingFilepath) {
+        this.attackingFilepath = attackingFilepath;
     }
     
     
