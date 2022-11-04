@@ -481,10 +481,6 @@ public class GameScreen extends javax.swing.JFrame {
         }
     }
     
-    
-    
-    
-    
     public void addPosibleDefensesScreen(){  //recorre el array de posibles defensas, crea una interfaz bonita para ponerla en pantalla
         Grid currentLevel = levelGrid.get(level);
         for(int i = 0; i<defenses.size();i++){
