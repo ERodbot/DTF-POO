@@ -17,7 +17,7 @@ enum Types {
     }
 
 public abstract class Entity {
-    public Types tipe;
+    public Types type;
     public String nombre;
     private int range;
     public int vida;
@@ -35,7 +35,7 @@ public abstract class Entity {
    
    
     
-    public Entity(String nombre, int vida, int cantidadGolpes, int nivel, int campos, int nivelAparicion, Grid grid, ImageIcon movementfilePath, ImageIcon attackfilePath){
+    public Entity(Types type, String nombre, int vida, int cantidadGolpes, int nivel, int campos, int nivelAparicion, Grid grid, ImageIcon movementfilePath, ImageIcon attackfilePath){
         this.nombre = nombre;
         this.vida = vida;
         this.cantidadGolpes = cantidadGolpes;
@@ -45,6 +45,7 @@ public abstract class Entity {
         this.grid = grid;
         this.moving = movementfilePath;
         this.attacking = attackfilePath;
+        this.type = type;
         
     }
     
@@ -328,11 +329,11 @@ public abstract class Entity {
     }
 
     public Types getTipe() {
-        return tipe;
+        return type;
     }
 
     public void setTipe(Types tipe) {
-        this.tipe = tipe;
+        this.type = tipe;
     }
     
     

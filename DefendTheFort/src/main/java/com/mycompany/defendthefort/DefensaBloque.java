@@ -21,7 +21,7 @@ public class DefensaBloque extends Entity implements Serializable{
     
     
     DefensaBloque(String nombre, int vida, int nivel, int campos, int nivelAparicion, Grid grid,  ImageIcon movementfilePath, ImageIcon attackfilePath){
-        super(nombre,vida,0,nivel,campos,nivelAparicion, grid, movementfilePath, movementfilePath);
+        super(Types.DEFENSABLOQUE, nombre,vida,0,nivel,campos,nivelAparicion, grid, movementfilePath, movementfilePath);
         setRange(1);
     }
 
