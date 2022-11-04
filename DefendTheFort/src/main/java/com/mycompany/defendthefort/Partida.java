@@ -6,6 +6,7 @@ package com.mycompany.defendthefort;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -25,6 +26,7 @@ public class Partida implements Serializable {
         this.numberOfGame = numberOfGame;
         this.user = user;
     }
+    
     
     
     

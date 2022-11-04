@@ -366,31 +366,31 @@ public class GameScreen extends javax.swing.JFrame {
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\ExplodingZombie.png");
         attacking = new ImageIcon( "C:\\Images\\explosion.gif");
         Entity ZombieExplosivo = new ZombieChoque("Zombie Explosivo",25,150,1,3,4, currentGrid, moving, attacking);
-         if(!zombies.contains(ZombieExplosivo))
+        if(!zombies.contains(ZombieExplosivo))
             zombies.add(ZombieExplosivo);
         
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\eyeball_attack-w.gif");
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\eyeball_attack-w.gif");
         Entity OjoDelDiablo = new ZombieMedio("OjoDelDiablo",40,15,5,2,1, currentGrid, moving, attacking);
-         if(!zombies.contains(OjoDelDiablo))
+        if(!zombies.contains(OjoDelDiablo))
             zombies.add(OjoDelDiablo);
           
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\PistolZombie.png");
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\PistolZombieAttacking.png");
         Entity ZombiePistolero = new ZombieMedio("Zombie Pistolero",50,20,1,4,7, currentGrid, moving, attacking);
-         if(!zombies.contains(ZombiePistolero))
+        if(!zombies.contains(ZombiePistolero))
             zombies.add(ZombiePistolero);
         
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\BalloonZombieHD.png");
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\FlyingZombieAttacking.png");
         Entity BalloonZombie = new ZombieAereo("Zombie con globo",30,20,1,3,1, currentGrid, moving, attacking);
-         if(!zombies.contains(BalloonZombie))
+        if(!zombies.contains(BalloonZombie))
             zombies.add(BalloonZombie);
         
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\ImpRocket.png");
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\explosion2.png");
         Entity ImpRocket = new ZombieChoque("Imp con Coete",40,50,1,3,6, currentGrid, moving, attacking);
-         if(!zombies.contains(ImpRocket))
+        if(!zombies.contains(ImpRocket))
             zombies.add(ImpRocket); 
     }
     
@@ -399,49 +399,49 @@ public class GameScreen extends javax.swing.JFrame {
         ImageIcon attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\TreeOfLife.png");
         ImageIcon moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\TreeOfLife.png");
         Entity  TreeOfLife = new DefensaBloque("Arbol de la vida",100,1,0,1, currentGrid, moving, attacking);
-         if(!defenses.contains(TreeOfLife))
+        if(!defenses.contains(TreeOfLife))
             defenses.add(TreeOfLife);
       
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\PunchingPlantResting.png");
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\PunchingPlantResting.png");
         Entity BonkChoy = new DefensaContacto("Bonk Choy",40,5,1,0,1, currentGrid, moving, attacking);
-         if(!defenses.contains(BonkChoy))
+        if(!defenses.contains(BonkChoy))
             defenses.add(BonkChoy);
         
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\gloomshroomattacking.png");
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\gloomshroom.png");
         Entity gloomshroom= new DefensaMultiple("gloomshroom",4,10,1,0,1, currentGrid, moving, attacking);
-         if(!defenses.contains(gloomshroom))
+        if(!defenses.contains(gloomshroom))
             defenses.add(gloomshroom);
         
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\peashooter.png");
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\peashooter.png");
         Entity peashooter = new DefensaMultiple("peashooter",40,3,1,0,1, currentGrid, moving, attacking);
-         if(!defenses.contains(peashooter))
+        if(!defenses.contains(peashooter))
             defenses.add(peashooter);
         
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\apisonaflormoving.png");
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\apisonaflormoving.png");
         Entity squash = new DefensaImpacto("Squash",15,70,3,0,1, currentGrid, moving, attacking);
-         if(!defenses.contains(squash))
+        if(!defenses.contains(squash))
             defenses.add(squash);     
         
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\Chomper.png");
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\chopperEating.png");
         Entity Chopper = new DefensaContacto("Chopper",55,10,1,0,2, currentGrid, moving, attacking);
-         if(!defenses.contains(Chopper))
+        if(!defenses.contains(Chopper))
             defenses.add(Chopper);
         
         moving =new ImageIcon("C:\\Images\\lol.gif");
         attacking = new ImageIcon("C:\\Images\\lol.gif");
         Entity starfruit = new DefensaMultiple("starfruit",40,15,5,0,1, currentGrid, moving, attacking);
-         if(!defenses.contains(starfruit))
+        if(!defenses.contains(starfruit))
             defenses.add(starfruit);
         
         moving = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\block.png");
         attacking = ImageManager.resize(currentGrid.getMatrix()[0][0].button, "C:\\Images\\block.png");
         Entity Bloque = new DefensaBloque("Bloque",100,1,0,1, currentGrid, moving, attacking);
-         if(!defenses.contains(Bloque))
+        if(!defenses.contains(Bloque))
             defenses.add(Bloque);          
     }
     

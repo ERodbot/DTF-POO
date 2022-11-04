@@ -22,7 +22,7 @@ public class DefensaAereo extends Entity implements Serializable{
     
     
     DefensaAereo(String nombre, int vida, int cantidadGolpes, int nivel, int campos, int nivelAparicion, Grid grid,  ImageIcon movementfilePath, ImageIcon attackfilePath){
-        super(nombre,vida,cantidadGolpes,nivel,campos,nivelAparicion, grid, movementfilePath, movementfilePath);
+        super(Types.DEFENSAAEREO, nombre,vida,cantidadGolpes,nivel,campos,nivelAparicion, grid, movementfilePath, movementfilePath);
         setRange(1);
     }
 
@@ -60,7 +60,7 @@ public class DefensaAereo extends Entity implements Serializable{
     //clona la entidad con sus atributos;
     @Override
     public Entity clone(){
-        DefensaBloque clonedEntity =  new DefensaBloque(nombre, vida, nivel, campos, nivelAparicion, grid,  moving, attacking);
+        DefensaAereo clonedEntity =  new DefensaAereo(nombre, vida, cantidadGolpes, nivel, campos, nivelAparicion, grid,  moving, attacking);
         return clonedEntity;
     }
 
