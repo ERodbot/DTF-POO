@@ -17,7 +17,7 @@ public class Factory {
     
  
 
-    static Entity build(Types entityType, EntityDummy base, Grid grid){
+    static Entity dummyToEntity(Types entityType, EntityDummy base, Grid grid){
         
     JButton reference = new JButton();
     reference.setSize(35,35);
@@ -67,7 +67,7 @@ public class Factory {
     static ArrayList<Entity> convertToRealEntity(ArrayList<EntityDummy> array, Grid grid){
         ArrayList<Entity> res = new ArrayList<Entity>(); 
         for(EntityDummy dummy: array){ 
-           res.add(Factory.build(dummy.type, dummy, grid));
+           res.add(Factory.dummyToEntity(dummy.type, dummy, grid));
        }
         return res;
     }

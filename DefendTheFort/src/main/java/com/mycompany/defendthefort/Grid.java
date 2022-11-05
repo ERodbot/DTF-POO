@@ -178,8 +178,7 @@ public class Grid implements Serializable{
             game.flyingEntities.add(dummy);
         }
         game.setLevel(nivel);
-        
-        
+           
         for (Entity zombie : zombies) {
             threadArray.add(new ThreadEntity(zombie, this));
         }
