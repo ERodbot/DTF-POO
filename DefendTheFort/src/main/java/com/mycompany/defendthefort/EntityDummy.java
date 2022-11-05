@@ -13,9 +13,6 @@ import javax.swing.ImageIcon;
  * @author em000
  */
 
-
-
-
 public class EntityDummy implements Serializable{
     public Types type;
     public String nombre;
@@ -26,7 +23,7 @@ public class EntityDummy implements Serializable{
     String movingFilePath; //imagen de la entidad en movimiento
     String attackingFilePath;  
     
-    EntityDummy(Types type, String bombre, int range, int vida, int cantidadGolpes, int nivel, int nivelAparicion, int posx, int posy, Register register, String movingFilePath, String attackingFilePath){
+    EntityDummy(Types type, String nombre, int range, int vida, int campos, int cantidadGolpes, int nivel, int nivelAparicion, int posx, int posy, Register register, String movingFilePath, String attackingFilePath){
         this.type = type;
         this.nombre = nombre;
         this.range = range;

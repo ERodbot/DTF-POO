@@ -71,5 +71,45 @@ public class Factory {
        }
         return res;
     }
-       
-}
+
+public static EntityDummy entityToDummy(Entity entity, Types type){
+        
+    EntityDummy dummy;
+
+        switch(type){
+            case ZOMBIEAEREO:
+                 dummy = new EntityDummy(Types.ZOMBIEAEREO, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath());
+                 break;
+            case ZOMBIECHOQUE:
+                 dummy = new EntityDummy(Types.ZOMBIECHOQUE, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath());
+                 break;
+            case ZOMBIECONTACTO:
+                 dummy = new EntityDummy(Types.ZOMBIECONTACTO, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath());
+                 break;
+            case ZOMBIEMEDIO:
+                dummy = new EntityDummy(Types.ZOMBIEMEDIO, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath());
+                 break;
+            case DEFENSAAEREO:
+                 dummy = new EntityDummy(Types.DEFENSAAEREO, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath());
+                 break;
+            case DEFENSABLOQUE:
+                 dummy = new EntityDummy(Types.DEFENSABLOQUE, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath());
+                 break;
+            case DEFENSACONTACTO:
+                 dummy = new EntityDummy(Types.DEFENSACONTACTO, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath());
+                 break;
+            case DEFENSAIMPACTO:
+                 dummy = new EntityDummy(Types.DEFENSAIMPACTO, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath());
+                 break;
+            case DEFENSAMEDIO:
+                dummy = new EntityDummy(Types.DEFENSAMEDIO, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath());
+                 break;
+            case DEFENSAMULTIPLE:
+                 dummy = new EntityDummy(Types.DEFENSAMULTIPLE, entity.getNombre(), entity.getRange(), entity.getVida(), entity.getCampos(), entity.getCantidadGolpes(), entity.getNivel(), entity.getNivelAparicion(), entity.getPosx(), entity.getPosy(), entity.getRegister(),entity.getMovingFilepath(),entity.getAttackingFilepath()); 
+                 break;          
+            case default:
+                return null;
+        }
+    return dummy;
+    }
+}  
