@@ -37,10 +37,8 @@ public class PantallaInicio extends javax.swing.JFrame {
         pnlPantallaInicio = new javax.swing.JPanel();
         Login = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txfNombre = new javax.swing.JTextField();
         txfPsw = new javax.swing.JTextField();
         txfID = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         SignUp = new javax.swing.JButton();
@@ -66,20 +64,11 @@ public class PantallaInicio extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 51));
         jLabel1.setText("Sign up");
 
-        txfNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfNombreActionPerformed(evt);
-            }
-        });
-
         txfID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfIDActionPerformed(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Name");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Username");
@@ -108,10 +97,8 @@ public class PantallaInicio extends javax.swing.JFrame {
                 .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                        .addComponent(txfID)
+                        .addComponent(txfID, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                         .addComponent(txfPsw)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaInicioLayout.createSequentialGroup()
@@ -133,19 +120,15 @@ public class PantallaInicio extends javax.swing.JFrame {
                 .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txfPsw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(txfPsw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83)
                 .addComponent(SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(58, Short.MAX_VALUE))
         );
@@ -175,15 +158,11 @@ public class PantallaInicio extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_LoginActionPerformed
 
-    private void txfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfNombreActionPerformed
-
     private void SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpActionPerformed
         
         if(!login.usuarios.buscarUsuario(txfID.getText(), txfPsw.getText())){ //se crea un nuevo usuario con los datos dados
-            if(!txfID.getText().trim().equals("") && !txfNombre.getText().trim().equals("") && !txfPsw.getText().trim().equals("")){
-                login.usuarios.darDeAlta(txfID.getText(), txfNombre.getText(), txfPsw.getText());     
+            if(!txfID.getText().trim().equals("") && !txfPsw.getText().trim().equals("")){
+                login.usuarios.darDeAlta(txfID.getText(), txfPsw.getText());     
                 User usuario = login.usuarios.obtenerUsuario(txfID.getText());
                 GameScreen game = new GameScreen(new Partida(usuario, 1));
                 game.setResizable(false);
@@ -240,12 +219,10 @@ public class PantallaInicio extends javax.swing.JFrame {
     private javax.swing.JButton Login;
     private javax.swing.JButton SignUp;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel pnlPantallaInicio;
     private javax.swing.JTextField txfID;
-    private javax.swing.JTextField txfNombre;
     private javax.swing.JTextField txfPsw;
     // End of variables declaration//GEN-END:variables
 }

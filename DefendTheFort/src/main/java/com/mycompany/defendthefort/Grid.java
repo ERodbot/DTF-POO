@@ -165,26 +165,24 @@ public class Grid implements Serializable{
     
     
     public void saveGame(Partida game){ 
+        System.out.println("saved performed");
         for (Entity defensa : defenses) {
             EntityDummy dummy = Factory.entityToDummy(defensa, defensa.type);
             game.defenses.add(dummy);
+            System.out.println("guardado: " + dummy.nombre);
         }
         for (Entity zombie : zombies) {
             EntityDummy dummy = Factory.entityToDummy(zombie, zombie.type);
             game.zombies.add(dummy);
+            System.out.println("guardado: " + dummy.nombre);
         }
         for (Entity flyingEntity : flyingEntities) {
             EntityDummy dummy = Factory.entityToDummy(flyingEntity, flyingEntity.type);
             game.flyingEntities.add(dummy);
+            System.out.println("guardado: " + dummy.nombre);
         }
         game.setLevel(nivel);
-           
-        for (Entity zombie : zombies) {
-            threadArray.add(new ThreadEntity(zombie, this));
-        }
-        for (Entity defensas : defenses) {
-            threadArray.add(new ThreadEntity(defensas, this));
-        }
+        System.out.println("saved finiched");  
     }
     
     public void endGame() {

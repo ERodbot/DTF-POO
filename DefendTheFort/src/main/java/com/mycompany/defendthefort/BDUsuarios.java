@@ -75,7 +75,7 @@ public class BDUsuarios implements Serializable{
      * @param name
      * @param password
      */
-    public void darDeAlta(String ID, String name, String password){
+    public void darDeAlta(String ID, String password){
         boolean buscado = buscarUsuario(ID, password);
         if(users == null){
             User toAdd = new User(ID, password);

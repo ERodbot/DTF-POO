@@ -110,7 +110,7 @@ public class Login extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if(usuarios.buscarUsuario(txfUser.getText(), txfPsw.getText())){  //busca al usuario, si lo encuentra en la BD
             User usuario = usuarios.obtenerUsuario(txfUser.getText());            //genera una pantalla de juego.
-            GameScreen game = new GameScreen(new Partida(usuario, 1));
+            GameScreen game = new GameScreen(usuario.getPartidas().get(0));
             game.setResizable(false);
             game.setLocationRelativeTo(null);
             game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

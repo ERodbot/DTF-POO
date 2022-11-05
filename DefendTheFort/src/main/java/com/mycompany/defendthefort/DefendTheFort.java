@@ -22,7 +22,7 @@ public class DefendTheFort {
         BDUsuarios bd = new BDUsuarios();
         File archivo = new File("users.dat");
         if(!archivo.exists())
-            bd.darDeAlta("admin", "admin", "admin"); //consultar como hacerlo solo la primera vez
+            bd.darDeAlta("admin", "admin"); //consultar como hacerlo solo la primera vez
         bd.restaurar();
     //        
 
