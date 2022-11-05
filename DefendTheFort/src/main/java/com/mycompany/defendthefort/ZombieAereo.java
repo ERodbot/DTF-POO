@@ -62,6 +62,7 @@ public class ZombieAereo extends Entity implements Serializable{
     @Override
     public Entity clone(){
         ZombieAereo clonedEntity =  new ZombieAereo(nombre, vida, cantidadGolpes, nivel, campos, nivelAparicion, grid,  moving, attacking);
+         clonedEntity.setAttackingFilepath(getAttackingFilepath()); clonedEntity.setMovingFilepath(getMovingFilepath());
         return clonedEntity;
     }
 }

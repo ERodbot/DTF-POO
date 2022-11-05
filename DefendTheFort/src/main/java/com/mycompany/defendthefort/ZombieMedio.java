@@ -60,6 +60,7 @@ public class ZombieMedio extends Entity implements Serializable{
      @Override
     public Entity clone(){
         ZombieContacto clonedEntity =  new ZombieContacto(nombre, vida, cantidadGolpes, nivel, campos, nivelAparicion, grid,  moving, attacking);
+         clonedEntity.setAttackingFilepath(getAttackingFilepath()); clonedEntity.setMovingFilepath(getMovingFilepath());
         return clonedEntity;
     }
     

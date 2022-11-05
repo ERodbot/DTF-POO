@@ -64,6 +64,7 @@ public class DefensaImpacto extends Entity implements Serializable{
     @Override
     public Entity clone(){
         DefensaContacto clonedEntity =  new DefensaContacto(nombre, vida, cantidadGolpes, nivel, campos, nivelAparicion, grid,  moving, attacking);
+         clonedEntity.setAttackingFilepath(getAttackingFilepath()); clonedEntity.setMovingFilepath(getMovingFilepath());
         return clonedEntity;
     }
 

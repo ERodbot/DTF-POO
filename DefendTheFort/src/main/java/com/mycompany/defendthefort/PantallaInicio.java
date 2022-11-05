@@ -164,7 +164,7 @@ public class PantallaInicio extends javax.swing.JFrame {
             if(!txfID.getText().trim().equals("") && !txfPsw.getText().trim().equals("")){
                 login.usuarios.darDeAlta(txfID.getText(), txfPsw.getText());     
                 User usuario = login.usuarios.obtenerUsuario(txfID.getText());
-                GameScreen game = new GameScreen(new Partida(usuario, 1));
+                GameScreen game = new GameScreen(new Partida(usuario, 0), txfID.getText());
                 game.setResizable(false);
                 game.setLocationRelativeTo(null);
                 game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -164,7 +164,7 @@ public class Grid implements Serializable{
     }   
     
     
-    public void saveGame(Partida game){ 
+    public Partida saveGame(Partida game){ 
         System.out.println("saved performed");
         for (Entity defensa : defenses) {
             EntityDummy dummy = Factory.entityToDummy(defensa, defensa.type);
@@ -182,7 +182,8 @@ public class Grid implements Serializable{
             System.out.println("guardado: " + dummy.nombre);
         }
         game.setLevel(nivel);
-        System.out.println("saved finiched");  
+        System.out.println("saved finished"); 
+        return game;
     }
     
     public void endGame() {

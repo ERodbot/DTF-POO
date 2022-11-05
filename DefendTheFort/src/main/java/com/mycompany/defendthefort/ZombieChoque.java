@@ -60,6 +60,7 @@ public class ZombieChoque extends Entity implements Serializable{
     @Override
     public Entity clone(){
         ZombieChoque clonedEntity =  new ZombieChoque(nombre, vida, cantidadGolpes, nivel, campos, nivelAparicion, grid,  moving, attacking);
+         clonedEntity.setAttackingFilepath(getAttackingFilepath()); clonedEntity.setMovingFilepath(getMovingFilepath());
         return clonedEntity;
     }
     

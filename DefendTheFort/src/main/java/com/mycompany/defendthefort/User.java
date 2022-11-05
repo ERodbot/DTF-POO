@@ -12,7 +12,7 @@ public class User implements Serializable{
     
     
     public User(String ID, String password){
-        partidas.add(new Partida(this,1));
+        partidas.add(new Partida(this,0));
         this.ID = ID;
         this.password = password; 
          
@@ -21,6 +21,8 @@ public class User implements Serializable{
     public ArrayList<Partida> getPartidas() {
         return partidas;
     }
+    
+ 
 
     public void setPartidas(ArrayList<Partida> partidas) {
         this.partidas = partidas;

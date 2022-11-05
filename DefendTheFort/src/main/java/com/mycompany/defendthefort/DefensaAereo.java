@@ -61,6 +61,7 @@ public class DefensaAereo extends Entity implements Serializable{
     @Override
     public Entity clone(){
         DefensaAereo clonedEntity =  new DefensaAereo(nombre, vida, cantidadGolpes, nivel, campos, nivelAparicion, grid,  moving, attacking);
+        clonedEntity.setAttackingFilepath(getAttackingFilepath()); clonedEntity.setMovingFilepath(getMovingFilepath());
         return clonedEntity;
     }
 

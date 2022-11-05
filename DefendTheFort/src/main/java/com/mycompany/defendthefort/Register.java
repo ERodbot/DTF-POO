@@ -4,6 +4,7 @@
  */
 package com.mycompany.defendthefort;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,7 +12,7 @@ import java.util.Random;
  *
  * @author em000
  */
-public class Register {
+public class Register implements Serializable{
     String ID;
     private  ArrayList<String> attackers = new ArrayList();  //arrays de entidades que atacaron/fueron atacadas por la entidad
     private ArrayList damageReceived = new ArrayList();      //con el ataque que les corresponde

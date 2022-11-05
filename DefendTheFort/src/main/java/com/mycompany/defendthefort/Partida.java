@@ -15,8 +15,8 @@ import javax.swing.ImageIcon;
 public class Partida implements Serializable {
     User user;   //sistema de manejo de la creacion de los personajes;
     int level = 1;
-    int numberOfGame; 
-    public  BDUsuarios usuarios;
+    int numberOfGame;
+    boolean saved = false;
     public  ArrayList<EntityDummy> defenses = new ArrayList<EntityDummy>(); //array de las posibles defensas para cada partidoa;
     public  ArrayList<EntityDummy> zombies = new ArrayList<EntityDummy>(); //array de los posibles zombies para cada partida
     public  ArrayList<EntityDummy> defensesActive = new ArrayList<EntityDummy>(); //array de las posibles defensas para cada partidoa;
@@ -24,9 +24,8 @@ public class Partida implements Serializable {
     public  ArrayList<EntityDummy> flyingEntities = new ArrayList<EntityDummy>();
    
     Partida(User user, int numberOfGame){
+        System.out.print("new game!");
         this.numberOfGame = numberOfGame;
-        usuarios = new BDUsuarios();
-        usuarios.restaurar();
         this.user = user;
     }
     

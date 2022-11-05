@@ -30,6 +30,7 @@ public class ImageManager{
              Image dimg = img.getScaledInstance(component.getWidth(), component.getHeight(), Image.SCALE_SMOOTH);
              return new ImageIcon(dimg);
         }catch (IOException e){
+            System.out.println("404 NOT FOUND");
             e.printStackTrace();
         }
         return null;
