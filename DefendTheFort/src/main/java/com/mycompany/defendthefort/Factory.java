@@ -85,7 +85,10 @@ public class Factory {
     if(created!=null){
         created.setRegister(base.register);
         created.setRange(base.range);
-        created.setLocation(base.posx, base.posy);
+        created.setAttackingFilepath(base.attackingFilePath);
+        created.setMovingFilepath(base.movingFilePath);
+        created.setLocation(base.posy, base.posx);
+        
     }
     return created;
     }

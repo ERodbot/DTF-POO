@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 public class ThreadGame extends Thread {
     GameScreen game;
     boolean winner = false;
+   
     
     ThreadGame(GameScreen game){
         this.game = game;
@@ -26,6 +27,9 @@ public class ThreadGame extends Thread {
     public void run(){
         Entity treeOfLife = game.getCurrentLevel().getTreeOfLife().personaje;
         while(treeOfLife.getLife()>0){
+            
+
+                
             game.getLblConsulta().setText(game.getCurrentLevel().getConsult());
             if(game.getCurrentLevel().getZombies().size() == 0){
                 treeOfLife.setLife(0);
@@ -34,6 +38,7 @@ public class ThreadGame extends Thread {
                 winner = !winner;
             }
         } 
+        game.getCurrentLevel().endGame();
         Object[] options = {"Continuar", "Cancelar"};
         String txt = "VICTORIA";
         if(!winner){
@@ -41,14 +46,18 @@ public class ThreadGame extends Thread {
         }
         int choice = JOptionPane.showOptionDialog(null, txt, "Continuar al siguiente nivel",JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, "Metric");
         if(choice == 0 ){
-            game.getCurrentLevel().endGame();
             game.setLevel(game.getLevel()+1);
+            if(game.getLevel() >=10){
+                game.getLevelGrid().add(new Grid(game.getLevel()));
+            }
             game.placeButtons(game.getCurrentLevel().getMatrix());
             game.levelUpEntities();
             game.getPnlDefenses().removeAll();
             game.addPosibleDefensesScreen();
+            System.out.println("la capacidad actual es: " + game.getCurrentLevel().zombieCapacity);
+            System.out.println("nivel: " + game.getCurrentLevel().nivel);
         }else{
-           game.getTpnlContent().setSelectedIndex(0);    
+           game.getTpnlContent().setSelectedIndex(3);    
         }
       game.getGameThread().start();
         System.out.println("Finished");

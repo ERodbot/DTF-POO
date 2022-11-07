@@ -65,11 +65,7 @@ public class Tile implements Serializable {
             }
         }
     }
-    
-    
-                
-                
-                
+              
      public void setLocation(int y, int x){
         this.posx = x;
         this.posy = y;

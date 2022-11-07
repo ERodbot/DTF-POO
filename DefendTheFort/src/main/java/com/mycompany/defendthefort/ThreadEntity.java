@@ -16,7 +16,7 @@ public class ThreadEntity extends Thread {
     
     public Entity entity;
     public Grid grid;
-    public boolean isRunning;
+     boolean paused = false;
     
     ThreadEntity(Entity entity,Grid tablero){
         this.entity = entity;
@@ -30,6 +30,13 @@ public class ThreadEntity extends Thread {
         int x = TreeOfLifeTile.getPosx();
         int y = TreeOfLifeTile.getPosy();
         while(entity.getLife()>0){
+            while(paused){
+                try {
+                    sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ThreadEntity.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             if(entity.getLife() <= 0)
                 System.out.println("Porque sigue desgraciado!!");
             try {
@@ -53,4 +60,10 @@ public class ThreadEntity extends Thread {
         }
         System.out.println("THREAD HA PARADO PARA : + " + entity.nombre);
     }
+    
+    
+    public void pause(){
+        this.paused = !paused;
+    }
 }
+

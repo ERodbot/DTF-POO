@@ -16,8 +16,8 @@ public class Grid implements Serializable{
     public int nivel;
     public Tile[][] matrix;
     private final int ancho = 35,  alto = 35;
-    public int zombieCapacity = 20 + (nivel-1)*5;
-    private int defenseCapacity = 20 + (nivel-1)*5;
+    public int zombieCapacity;
+    private int defenseCapacity;
     private  ArrayList<Entity> zombies;
     private  ArrayList<Entity> defenses;
     private  ArrayList<Entity> flyingEntities;
@@ -28,6 +28,8 @@ public class Grid implements Serializable{
 
      public Grid(int level){
         generateComponents();
+        defenseCapacity = 20 + level*5;
+        zombieCapacity = 20 + level*5;
         this.nivel = level+1;
     }
     
@@ -81,8 +83,8 @@ public class Grid implements Serializable{
                 return;
             int zombieToGenerate  = rand.nextInt(possibleZombies.size()-1);
             Entity zombie = possibleZombies.get(zombieToGenerate).clone(); //escoge un zombie al azar
-//            if(zombieCapacity - zombie.campos < 0)
-//                break;
+            if(zombie.nivelAparicion  > nivel+1 )
+                continue;
             int correctPositions = rand.nextInt(96);
             if (correctPositions == 10||correctPositions == 9||correctPositions == 8||correctPositions == 7 ||correctPositions == 6 ||correctPositions == 5||correctPositions == 4||correctPositions == 3){
                 matrix[i][j].personaje = zombie;
@@ -108,9 +110,6 @@ public class Grid implements Serializable{
             defenseEntity.setFlyingEntities(flyingEntities);
             defenseEntity.setDefenses(defenses);
             defenseEntity.setZombies(zombies);
-            for(Entity zombies: defenseEntity.getZombies()){
-                System.out.println("Zombie en la lista de objetivos de la defensa: " + zombies.nombre);
-            }
         }
         for(Entity zombieEntity: zombies){
             zombieEntity.setFlyingEntities(flyingEntities);
@@ -135,12 +134,7 @@ public class Grid implements Serializable{
         }
         return null;        
     }
-    
-    
-    
-    
-    
-    
+        
     public void lockFinalLife(){
         for(Entity defenseEntity: defenses){
             defenseEntity.getRegister().setFinalLife(defenseEntity.getLife());
@@ -152,20 +146,19 @@ public class Grid implements Serializable{
         }
     }
     
-
     public void SimulacionCochina(){   //empieza los threads de las entidades del juego
         actualizeObjectives();
         for(ThreadEntity entity: threadArray){
             System.out.println(entity.entity.nombre);
-        }
-        if(zombieCapacity <= 0)
-            for(ThreadEntity entity: threadArray)
-               entity.start();
+            entity.start();
+        }            
     }   
-    
-    
+        
     public Partida saveGame(Partida game){ 
         System.out.println("saved performed");
+        game.defenses = new ArrayList<EntityDummy>();
+        game.zombies = new ArrayList<EntityDummy>();
+        game.flyingEntities = new ArrayList<EntityDummy>();
         for (Entity defensa : defenses) {
             EntityDummy dummy = Factory.entityToDummy(defensa, defensa.type);
             game.defenses.add(dummy);

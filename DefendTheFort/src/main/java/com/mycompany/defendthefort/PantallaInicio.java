@@ -4,25 +4,28 @@
  */
 package com.mycompany.defendthefort;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
  * @author USUARIO
  */
 public class PantallaInicio extends javax.swing.JFrame {
-     Login login = new Login();
-    
-    
-    
-
+     BDUsuarios usuarios = new BDUsuarios();
+     DefaultListModel model =  new DefaultListModel();
     /**
      * Creates new form PantallaInicio
      */
     public PantallaInicio() {
+        usuarios.restaurar();
         initComponents();
+        gamesLst.setModel(model);
     }
 
     /**
@@ -42,6 +45,8 @@ public class PantallaInicio extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         SignUp = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        gamesLst = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,7 +67,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(51, 0, 51));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel1.setText("Sign up");
+        jLabel1.setText("Zombie Apocalypse");
 
         txfID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +82,7 @@ public class PantallaInicio extends javax.swing.JFrame {
         jLabel4.setText("Password");
 
         SignUp.setBackground(new java.awt.Color(0, 0, 51));
-        SignUp.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SignUp.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         SignUp.setForeground(new java.awt.Color(255, 255, 255));
         SignUp.setText("Sign Up");
         SignUp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -88,59 +93,71 @@ public class PantallaInicio extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setViewportView(gamesLst);
+
         javax.swing.GroupLayout pnlPantallaInicioLayout = new javax.swing.GroupLayout(pnlPantallaInicio);
         pnlPantallaInicio.setLayout(pnlPantallaInicioLayout);
         pnlPantallaInicioLayout.setHorizontalGroup(
             pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPantallaInicioLayout.createSequentialGroup()
-                .addGap(115, 115, 115)
                 .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txfID, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                        .addComponent(txfPsw)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlPantallaInicioLayout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jLabel1))
+                    .addGroup(pnlPantallaInicioLayout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jLabel4)))
+                .addGap(0, 94, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaInicioLayout.createSequentialGroup()
-                .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlPantallaInicioLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlPantallaInicioLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                        .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaInicioLayout.createSequentialGroup()
+                        .addComponent(SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaInicioLayout.createSequentialGroup()
+                        .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txfPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlPantallaInicioLayout.createSequentialGroup()
+                                .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12))
+                            .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(115, 115, 115))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaInicioLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(106, 106, 106))))
         );
         pnlPantallaInicioLayout.setVerticalGroup(
             pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPantallaInicioLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(pnlPantallaInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
+                .addGap(15, 15, 15)
+                .addComponent(SignUp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(txfPsw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
-                .addComponent(SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(pnlPantallaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,22 +171,58 @@ public class PantallaInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-
-        login.setVisible(true);
+        if(usuarios.buscarUsuario(txfID.getText(), txfPsw.getText())){  //busca al usuario, si lo encuentra en la BD
+            User usuario = usuarios.obtenerUsuario(txfID.getText());            //genera una pantalla de juego.
+            model.removeAllElements();
+            for(Partida game: usuario.getPartidas()){
+               model.addElement(game.numberOfGame+" ");
+           }
+            model.addElement("nueva partida");
+            gamesLst.addListSelectionListener(new ListSelectionListener() {
+                public void valueChanged(ListSelectionEvent evt) {
+                    selectGame(evt);
+                }
+            private void selectGame(ListSelectionEvent evt) {
+//                GameScreen game;
+                if(gamesLst.getSelectedValue()=="nueva partida"){
+                  System.out.println(" new: " + gamesLst.getSelectedIndex());
+                  usuario.getPartidas().add(new Partida(usuario, gamesLst.getSelectedIndex()));
+                  usuarios.guardar();
+                  usuarios.restaurar();
+                  GameScreen game = new GameScreen(usuario.getPartidas().get(usuario.getPartidas().size()-1), txfID.getText());
+                  game.setResizable(false);
+                  game.setLocationRelativeTo(null);
+                  game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                  game.setVisible(rootPaneCheckingEnabled);
+                  return;
+                }
+               System.out.println("not new");
+               GameScreen game = new GameScreen(usuario.getPartidas().get(gamesLst.getSelectedIndex()), txfID.getText());
+                game.setResizable(false);
+                game.setLocationRelativeTo(null);
+                game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                game.setVisible(rootPaneCheckingEnabled);
+                }
+            });
+        }      
+        
+        else
+            JOptionPane.showMessageDialog(this, "No existe", "Error", 1);
+//                   
+//        
     }//GEN-LAST:event_LoginActionPerformed
 
     private void SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpActionPerformed
         
-        if(!login.usuarios.buscarUsuario(txfID.getText(), txfPsw.getText())){ //se crea un nuevo usuario con los datos dados
+        if(!usuarios.buscarUsuario(txfID.getText(), txfPsw.getText())){ //se crea un nuevo usuario con los datos dados
             if(!txfID.getText().trim().equals("") && !txfPsw.getText().trim().equals("")){
-                login.usuarios.darDeAlta(txfID.getText(), txfPsw.getText());     
-                User usuario = login.usuarios.obtenerUsuario(txfID.getText());
+                usuarios.darDeAlta(txfID.getText(), txfPsw.getText());     
+                User usuario = usuarios.obtenerUsuario(txfID.getText());
                 GameScreen game = new GameScreen(new Partida(usuario, 0), txfID.getText());
                 game.setResizable(false);
                 game.setLocationRelativeTo(null);
                 game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 game.setVisible(rootPaneCheckingEnabled);
-                game.setVisible(true);
             }
         }
     
@@ -218,9 +271,11 @@ public class PantallaInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login;
     private javax.swing.JButton SignUp;
+    private javax.swing.JList<String> gamesLst;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlPantallaInicio;
     private javax.swing.JTextField txfID;
     private javax.swing.JTextField txfPsw;

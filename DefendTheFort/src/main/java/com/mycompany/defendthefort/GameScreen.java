@@ -57,20 +57,23 @@ public class GameScreen extends javax.swing.JFrame {
         this.userID = userID;
         users.restaurar();
         this.game = game;
-        this.level = game.getLevel();
+        this.level = game.getLevel() -1;
         initComponents();
         for(int i = 0; i<10; i++){
-            levelGrid.add(new Grid(level));
+            levelGrid.add(new Grid(i));
+            System.out.println("zc: " + levelGrid.get(i).zombieCapacity);
         }
+        System.out.println("Capacidad de zombies: " + getCurrentLevel().zombieCapacity);
+        System.out.println("Nivel: " + level);
         zombies = Factory.convertToRealEntity(game.zombiesActive, getCurrentLevel());
         defenses = Factory.convertToRealEntity(game.defensesActive, getCurrentLevel());
         initializaPossibleZombies();
         initializaPossibleDefenses();
         actualizeCurrentLevel();
-        System.out.println("loading starting");
         loadEntities();
         addPosibleDefensesScreen();
         initGUIComp();
+       
 //        if(game.user.getID() != "admin")
 //            saveBtn.setVisible(false);   
     }
@@ -104,6 +107,7 @@ public class GameScreen extends javax.swing.JFrame {
         exitBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         addNewEntitiesBtn2 = new javax.swing.JButton();
+        returnBtn = new javax.swing.JButton();
         optionslbl = new javax.swing.JLabel();
 
         pnlContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -261,7 +265,7 @@ public class GameScreen extends javax.swing.JFrame {
                 saveBtnActionPerformed(evt);
             }
         });
-        pnlOptions.add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 280, 100));
+        pnlOptions.add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 280, 100));
 
         addNewEntitiesBtn2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addNewEntitiesBtn2.setText("AÑADIR COMPONENTES");
@@ -270,10 +274,19 @@ public class GameScreen extends javax.swing.JFrame {
                 addNewEntitiesBtn2ActionPerformed(evt);
             }
         });
-        pnlOptions.add(addNewEntitiesBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 280, 100));
+        pnlOptions.add(addNewEntitiesBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 280, 100));
+
+        returnBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        returnBtn.setText("REGRESAR");
+        returnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBtnActionPerformed(evt);
+            }
+        });
+        pnlOptions.add(returnBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 280, 100));
 
         optionslbl.setPreferredSize(new java.awt.Dimension(800, 800));
-        pnlOptions.add(optionslbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(-400, -540, 1300, 1680));
+        pnlOptions.add(optionslbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(-330, -580, 1300, 1680));
 
         tpnlContent.addTab("tab4", pnlOptions);
 
@@ -311,8 +324,10 @@ public class GameScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         Grid currentLevel = levelGrid.get(level);
         System.out.println(level);
-        if(currentLevel.getTreeOfLife()!=null){
-            currentLevel.generarZombies(zombies);  //genera los zombies al azar y los coloca en el tablero de modo random
+        if(currentLevel.getTreeOfLife()!=null ){
+            if(currentLevel.getZombies().size()<=0){
+                 currentLevel.generarZombies(zombies);  //genera los zombies al azar y los coloca en el tablero de modo random
+            }
             gameThread = new ThreadGame(this);
             gameThread.start();
             currentLevel.SimulacionCochina(); //empieza los threads para todas las entidades
@@ -321,10 +336,13 @@ public class GameScreen extends javax.swing.JFrame {
 
     private void btnOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionesActionPerformed
         tpnlContent.setSelectedIndex(3);
+        for(ThreadEntity tEntity: getCurrentLevel().getThreadArray()){
+            tEntity.pause();
+        }
     }//GEN-LAST:event_btnOpcionesActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
@@ -334,6 +352,13 @@ public class GameScreen extends javax.swing.JFrame {
     private void addNewEntitiesBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewEntitiesBtn2ActionPerformed
         
     }//GEN-LAST:event_addNewEntitiesBtn2ActionPerformed
+
+    private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
+        tpnlContent.setSelectedIndex(1);
+        for(ThreadEntity tEntity: getCurrentLevel().getThreadArray()){
+            tEntity.pause();
+        }
+    }//GEN-LAST:event_returnBtnActionPerformed
 
     
     
@@ -422,7 +447,7 @@ public class GameScreen extends javax.swing.JFrame {
         Entity ImpRocket = new ZombieChoque("Imp con Coete",40,50,1,3,6, currentGrid, moving, attacking);
      
         ImpRocket.setAttackingFilepath("C:\\Images\\explosion2.png"); ImpRocket.setMovingFilepath( "C:\\Images\\ImpRocket.png");  
-         if(!zombies.contains(ImpRocket))
+//         if(!zombies.contains(ImpRocket))
             zombies.add(ImpRocket); 
     }
     
@@ -507,8 +532,8 @@ public class GameScreen extends javax.swing.JFrame {
         Grid currentLevel = levelGrid.get(level);
         int savedPosy = 0;
         for(int i = 0; i<defenses.size();i++){
-          Entity EntityDefense = defenses.get(i);
-          if(EntityDefense.nivelAparicion <= level){
+           Entity EntityDefense = defenses.get(i);
+           if(EntityDefense.nivelAparicion <= level+1){
            SelectedDefense defense = new SelectedDefense(EntityDefense, currentLevel); //clase con label y referencia a 
            JLabel lbldefense = defense.getLabelDefense();
            pnlDefenses.add(lbldefense);
@@ -517,6 +542,8 @@ public class GameScreen extends javax.swing.JFrame {
            }
         }      
     }
+    
+    
     
     public void placeButtons(Tile[][] matrix){  //coloca en la pantalla los botones de una partida,
         for (int i = 0; i < 25; i++) {
@@ -685,13 +712,11 @@ public class GameScreen extends javax.swing.JFrame {
         game.zombiesActive = new ArrayList<EntityDummy>();
         game.zombiesActive = (Factory.convertEntitiesToDummies(zombies));
         game.defensesActive = (Factory.convertEntitiesToDummies(defenses));
-        game.zombiesActive = (Factory.convertEntitiesToDummies(zombies));
         Partida gameSaved = getCurrentLevel().saveGame(game);
         game.saved = true;
         User currentUser = users.obtenerUsuario(userID);
         currentUser.getPartidas().set(game.numberOfGame, gameSaved);
-        users.guardar();
-        
+        users.guardar();   
     }
     
     
@@ -730,6 +755,178 @@ public class GameScreen extends javax.swing.JFrame {
         });
     }
 
+    public BDUsuarios getUsers() {
+        return users;
+    }
+
+    public Partida getGame() {
+        return game;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public JButton getAddNewEntitiesBtn2() {
+        return addNewEntitiesBtn2;
+    }
+
+    public JButton getExitBtn() {
+        return exitBtn;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JLabel getLblGameGrid() {
+        return lblGameGrid;
+    }
+
+    public JLabel getLblInitializeGame() {
+        return lblInitializeGame;
+    }
+
+    public JLabel getLbltitleConsulta() {
+        return lbltitleConsulta;
+    }
+
+    public JLabel getOptionslbl() {
+        return optionslbl;
+    }
+
+    public JPanel getPnlConsulta() {
+        return pnlConsulta;
+    }
+
+    public JPanel getPnlOptions() {
+        return pnlOptions;
+    }
+
+    public JPanel getPnlYouLost() {
+        return pnlYouLost;
+    }
+
+    public JButton getSaveBtn() {
+        return saveBtn;
+    }
+
+    public void setUsers(BDUsuarios users) {
+        this.users = users;
+    }
+
+    public void setLevelGrid(ArrayList<Grid> levelGrid) {
+        this.levelGrid = levelGrid;
+    }
+
+    public void setDefenses(ArrayList<Entity> defenses) {
+        this.defenses = defenses;
+    }
+
+    public void setZombies(ArrayList<Entity> zombies) {
+        this.zombies = zombies;
+    }
+
+    public void setGame(Partida game) {
+        this.game = game;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setAddNewEntitiesBtn2(JButton addNewEntitiesBtn2) {
+        this.addNewEntitiesBtn2 = addNewEntitiesBtn2;
+    }
+
+    public void setBtnOpciones(JButton btnOpciones) {
+        this.btnOpciones = btnOpciones;
+    }
+
+    public void setBtnStart(JButton btnStart) {
+        this.btnStart = btnStart;
+    }
+
+    public void setExitBtn(JButton exitBtn) {
+        this.exitBtn = exitBtn;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public void setjPanel2(JPanel jPanel2) {
+        this.jPanel2 = jPanel2;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public void setLblConsulta(JLabel lblConsulta) {
+        this.lblConsulta = lblConsulta;
+    }
+
+    public void setLblGameGrid(JLabel lblGameGrid) {
+        this.lblGameGrid = lblGameGrid;
+    }
+
+    public void setLblInitializeGame(JLabel lblInitializeGame) {
+        this.lblInitializeGame = lblInitializeGame;
+    }
+
+    public void setLbltitleConsulta(JLabel lbltitleConsulta) {
+        this.lbltitleConsulta = lbltitleConsulta;
+    }
+
+    public void setOptionslbl(JLabel optionslbl) {
+        this.optionslbl = optionslbl;
+    }
+
+    public void setPnlConsulta(JPanel pnlConsulta) {
+        this.pnlConsulta = pnlConsulta;
+    }
+
+    public void setPnlContent(JPanel pnlContent) {
+        this.pnlContent = pnlContent;
+    }
+
+    public void setPnlDefenses(JPanel pnlDefenses) {
+        this.pnlDefenses = pnlDefenses;
+    }
+
+    public void setPnlGame(JPanel pnlGame) {
+        this.pnlGame = pnlGame;
+    }
+
+    public void setPnlInitialScreen(JPanel pnlInitialScreen) {
+        this.pnlInitialScreen = pnlInitialScreen;
+    }
+
+    public void setPnlOptions(JPanel pnlOptions) {
+        this.pnlOptions = pnlOptions;
+    }
+
+    public void setPnlYouLost(JPanel pnlYouLost) {
+        this.pnlYouLost = pnlYouLost;
+    }
+
+    public void setSaveBtn(JButton saveBtn) {
+        this.saveBtn = saveBtn;
+    }
+
+    public void setScrollDefenses(JScrollPane scrollDefenses) {
+        this.scrollDefenses = scrollDefenses;
+    }
+
+    public void setTpnlContent(JTabbedPane tpnlContent) {
+        this.tpnlContent = tpnlContent;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNewEntitiesBtn2;
     private javax.swing.JButton btnOpciones;
@@ -750,6 +947,7 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JPanel pnlInitialScreen;
     private javax.swing.JPanel pnlOptions;
     private javax.swing.JPanel pnlYouLost;
+    private javax.swing.JButton returnBtn;
     private javax.swing.JButton saveBtn;
     private javax.swing.JScrollPane scrollDefenses;
     private javax.swing.JTabbedPane tpnlContent;

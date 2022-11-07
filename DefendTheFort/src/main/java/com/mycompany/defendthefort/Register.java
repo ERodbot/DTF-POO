@@ -70,8 +70,7 @@ public class Register implements Serializable{
     public ArrayList getDamageDone() {
         return damageDone;
     }
-
- 
+    
     public int getStartingLife() {
         return startingLife;
     }
